@@ -1,234 +1,107 @@
-🐾 LinkUp
+# 🧡 LinkUp  
+*A gentle, physical way to start real-world hangouts*
 
-A playful, physical way to spark community hangouts
-LinkUp is a small, expressive social device that lives in a shared space (e.g. a student flat).
-Instead of noisy group chats or awkward messages, residents propose hangouts through our Linki that react, announce, and reward social initiatives.
+Meet **Linki** — a small, expressive companion that lives in shared spaces and helps people connect more naturally.
 
-🌱 The Problem
+---
 
-In shared living spaces:
+## 🌍 The Problem
 
-People hesitate to initiate hangouts
+In shared living environments — student flats, co-living spaces, dorms — people often want to hang out but don’t.
 
-Messages get buried in group chats
+Not because they don’t care, but because:
+- initiating feels awkward or intrusive  
+- messages get lost or ignored in group chats  
+- there’s no signal that anyone actually *noticed* the invite  
+- social effort feels one-sided and unrewarded  
 
-There’s no feedback that anyone saw your invite
+Over time, this friction leads to silence — even when people genuinely want to connect.
 
-Social effort often goes unrewarded
+---
 
-This creates friction — even when people want to hang out.
+## 💡 The Idea
 
-💡 The Idea
+**LinkUp** lowers the emotional barrier to starting a hangout.
 
-Turn social initiation into a low-pressure, playful action.
+Instead of opening a phone or typing a message, users interact with **Linki**, a friendly physical pet that:
+- lets you propose a hangout with simple button presses  
+- reacts emotionally when something happens  
+- shares the invite in a shared physical space  
+- gently rewards the act of reaching out  
 
-HangoutPet:
+No apps.  
+No notifications.  
+No pressure.
 
-lets users propose hangouts with one or two buttons
+---
 
-reacts with expressive eyes
+## 🐾 Meet Linki
 
-broadcasts the invite locally over Wi-Fi
+Linki is designed to feel *alive*, not like another screen.
 
-rewards social initiative with a visible XP system
+- In idle moments, Linki blinks and looks curious  
+- When a hangout is proposed, Linki reacts with surprise  
+- When an invite is received, Linki shows the details clearly  
+- Over time, Linki reflects social activity in the space  
 
-optionally escalates the invite via a Raspberry Pi “Host Bot”
+This emotional feedback turns social coordination into something warm and human.
 
-No phones. No apps. Just ambient social computing.
+---
 
-🧩 System Overview
-Hardware
+## 🎮 Making Social Effort Visible
 
-ESP8266 (ESP-12E) × 2
+LinkUp introduces a light **Social XP** system.
 
-ESP A (Hub / Receiver)
+Each time someone proposes a hangout:
+- their Social XP increases  
+- progress is shown as a simple bar  
+- XP is visible only when the user chooses to check it  
 
-creates local Wi-Fi network
+This is not about competition or gamifying friendships.  
+It’s about acknowledging effort — even when plans don’t work out.
 
-receives events
+Trying still counts.
 
-displays reactions + event info
+---
 
-ESP B (Sender)
+## 🤝 How It Feels to Use
 
-user interface
+1. You’re in the flat, unsure whether to suggest something  
+2. You tap Linki and set a time and place  
+3. Linki reacts — your action is acknowledged  
+4. The invite is shared in the space  
+5. You see your Social XP grow  
+6. No awkward follow-ups, no social pressure  
 
-buttons + OLED
+A socially risky action becomes a small, playful moment.
 
-sends hangout proposals
+---
 
-OLED display (1.3" I2C)
+## 🌱 Why LinkUp Matters
 
-Buttons (2)
+LinkUp isn’t about forcing interaction or optimizing schedules.
 
-Raspberry Pi (optional extension)
+It’s about:
+- reducing social friction  
+- normalizing initiation  
+- rewarding kindness and effort  
+- supporting community wellbeing  
 
-(Optional) robotic arm connected to Raspberry Pi
+By moving social coordination off phones and into shared physical space, LinkUp helps communities feel more human.
 
-🖥️ Software Architecture
-ESP A — Hub / Receiver
+---
 
-Creates Wi-Fi AP (HangoutNet)
+## 🚀 Vision
 
-Runs HTTP server (POST /event)
+LinkUp imagines a future where:
+- social technology is ambient, not demanding  
+- starting a hangout feels safe and encouraged  
+- shared spaces actively support connection  
 
-Default state: animated eyes
+Linki doesn’t tell people what to do —  
+it simply makes it easier to reach out.
 
-On event:
+---
 
-😲 Surprised eyes
-
-📢 Event details (8s)
-
-🙂 Return to idle eyes
-
-Fully non-blocking (no delay() in networking path)
-
-ESP B — Sender / Controller
-
-Joins HangoutNet
-
-Button-based UI:
-
-Set time
-
-Choose location
-
-Confirm event
-
-Sends JSON via HTTP POST
-
-Gamified XP system
-
-Each sent event increases Social XP
-
-XP visualised as a progress bar
-
-XP screen shown via long-press
-
-Raspberry Pi (Extension)
-
-Acts as a Host / Concierge AI
-
-Receives events
-
-Uses an AI agent to:
-
-generate friendly invite messages
-
-decide tone / suggestion
-
-Controls a physical arm to “announce” hangouts
-
-Can acknowledge events back to ESP devices
-
-🎮 Gamification Layer
-
-Social XP Bar (0–100%)
-
-Earn XP by proposing hangouts
-
-XP displayed locally on the device
-
-Makes social effort visible and rewarding
-
-Designed to motivate initiative, not spam
-
-👁️ Expressive Design
-
-The device behaves like a character:
-
-Happy / Curious idle states
-
-Blinking animation
-
-Surprised reaction on incoming events
-
-Emotional feedback makes the system feel alive
-
-📡 Communication Protocol
-
-POST /event
-
-{
-  "location": "Kitchen",
-  "time_offset_h": 2,
-  "sender_id": "Alex"
-}
-
-
-Local only (no cloud)
-
-Fast ACK to avoid timeouts
-
-Designed for multi-device scaling
-
-🧪 Demo Flow (What Judges See)
-
-Device sits idle, blinking
-
-User proposes hangout on sender
-
-XP bar increases 🎉
-
-Receiver reacts with surprise
-
-Event details appear
-
-(Optional) Raspberry Pi arm announces invite
-
-Device returns to calm idle state
-
-🚀 Why This Wins
-
-Community-focused, not productivity theater
-
-Physical + digital + emotional feedback loop
-
-No phone dependency
-
-Scales naturally to more devices
-
-Clear AI role (not bolted-on)
-
-Delightful demo presence
-
-🔮 Future Extensions
-
-RSVP buttons on multiple senders
-
-Mood-of-the-flat detection
-
-Time-based reminders
-
-Personalized AI host personalities
-
-Persistent XP levels per resident
-
-🛠️ Setup (Quick)
-
-Flash ESP A (Hub) → creates HangoutNet
-
-Flash ESP B (Sender) → joins network
-
-Power both devices
-
-(Optional) Run Raspberry Pi Flask server
-
-Start proposing hangouts ✨
-
-👥 Team
-
-Built collaboratively during a hackathon, combining:
-
-Embedded systems
-
-Networked devices
-
-Expressive UI
-
-Human-centred design
-
-AI agents
-
-HangoutPet — because starting a hangout should feel fun, not awkward 🐾
+**LinkUp**  
+*Small device. Real connections.*
